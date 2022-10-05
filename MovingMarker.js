@@ -209,6 +209,7 @@ L.Marker.MovingMarker = L.Marker.extend({
     },
 
     _loadLine: function(index) {
+        this.fire('station', { index: index });
         this._currentIndex = index;
         this._currentDuration = this._durations[index];
         this._currentLine = this._latlngs.slice(index, index + 2);
@@ -242,6 +243,7 @@ L.Marker.MovingMarker = L.Marker.extend({
             if (stationDuration !== undefined) {
                 if (elapsedTime < stationDuration) {
                     this.setLatLng(this._latlngs[lineIndex + 1]);
+                    this.fire('station', { index: lineIndex });
                     return null;
                 }
                 elapsedTime -= stationDuration;
@@ -260,6 +262,7 @@ L.Marker.MovingMarker = L.Marker.extend({
                     // the last position
                     this.setLatLng(this._latlngs[this._latlngs.length - 1]);
                     this.stop(elapsedTime);
+                    this.fire('station', { index: lineIndex });
                     return null;
                 }
             }
@@ -284,7 +287,7 @@ L.Marker.MovingMarker = L.Marker.extend({
         }
 
         if (elapsedTime != null) {
-             // compute the position
+            // compute the position
             var p = L.interpolatePosition(this._currentLine[0],
                 this._currentLine[1],
                 this._currentDuration,

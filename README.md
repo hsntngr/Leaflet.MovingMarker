@@ -93,7 +93,8 @@ All the marker's options are available.
 *Events*
 
  - ```start```: fired when the marker starts
- - ``` end```: fired when the marker stops 
+ - ``` end```: fired when the marker stops
+ - ``` station```: fired when the marker pass the station
  - ```loop```: fired when the marker begin a new loop
 
 **Note**: Event are not synchrone because of the use of ```requestAnimationFrame```.  If you quit the tab where the animation is working, events will be fired when the tab will get back the focus. Events ```end``` and ```loop``` have the attribute ```elapsedTime``` to get the time elapsed since the real end/loop.
